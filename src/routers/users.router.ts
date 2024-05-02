@@ -1,5 +1,7 @@
 import { Router } from "express";
 import * as usersService from "../services/users.service";
+import { CreateUser } from "../@types/dto";
+import registerValidation from "./middleware/register.validation";
 
 const usersRoute = Router()
 
@@ -12,11 +14,22 @@ usersRoute.get("/users", async (req, res) => {
     }
 });
 
-usersRoute.get("/users2", async (req, res) => {
+usersRoute.post("/register", registerValidation, async (req, res) => {
+    const { firstname, lastname, email, password } = req.body;
+
     try {
-        res.status(200).send('user ok2');
+        const newUser: CreateUser = { firstname: firstname, lastname: lastname, email: email, password: password }
+        console.log('newUser', newUser);
+        res.status(201).send('ok');
+        // const response = await usersService.register(newUser)
+
+        // if (response.code == responseCode.USER_EXISTS) {
+        //     res.status(400).send(responseStatus.USER_EXISTS);
+        // } else {
+        //     res.status(201).send(response);
+        // }
     } catch (err) {
-        res.status(500).send('error');
+        // res.status(400).send(responseStatus.ERROR);
     }
 });
 
