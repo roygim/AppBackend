@@ -1,15 +1,25 @@
 import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
-
-dotenv.config();
+import cors from "cors";
+import bodyParser from "body-parser";
+import { PORT } from "./consts";
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Express + TypeScript Server");
 });
 
-app.listen(port, () => {
-    console.log(`[server]: Server is running at http://localhost:${port}`);
+const corsConfig = {
+    origin: [
+        'http://localhost:5173'
+    ],
+    credentials: true
+}
+
+app.use(cors(corsConfig))
+
+app.use(bodyParser.json({ limit: '1mb' }))
+
+app.listen(PORT, () => {
+    console.log(`[server]: Server is running at http://localhost:${PORT}`);
 });
