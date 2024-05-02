@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import helmet from "helmet"
 import { PORT } from "./consts";
-import routes from "./routes"
+import routes from "./routers"
 
 const app: Express = express();
 

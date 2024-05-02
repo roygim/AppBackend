@@ -5,9 +5,9 @@ export type ResponseObj<T> = {
 }
 
 export interface User {
-    id?: number,
-    firstname?: string,
-    lastname?: string,
-    email?: string,
-    password?: string
+    id: number;
+    firstname: string | null;
+    lastname: string | null;
+    email: string | null;
+    password: string | null;
 }
