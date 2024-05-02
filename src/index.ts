@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { PORT } from "./consts";
+import routers from "./routers"
 
 const app: Express = express();
 
@@ -19,6 +20,8 @@ const corsConfig = {
 app.use(cors(corsConfig))
 
 app.use(bodyParser.json({ limit: '1mb' }))
+
+app.use('/api', routers)
 
 app.listen(PORT, () => {
     console.log(`[server]: Server is running at http://localhost:${PORT}`);
