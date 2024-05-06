@@ -18,7 +18,7 @@ usersRoute.post("/register", registerValidation, async (req, res) => {
     const { firstname, lastname, email, password } = req.body;
 
     try {
-        const newUser: CreateUser = { firstname: firstname, lastname: lastname, email: email, password: password }
+        const newUser: CreateUser = { firstname: firstname ?? '', lastname: lastname ?? '', email: email, password: password }
         console.log('newUser', newUser);
         res.status(201).send('ok');
         // const response = await usersService.register(newUser)
