@@ -36,9 +36,8 @@ usersRouter.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     try {
-
-        // const response = await usersService.login(email, password)
-
+        const response = await usersService.login(email, password)
+        console.log(response)
         // if (response.code == responseCode.INVALID_PASSWORD) {
         //     res.status(400).send(responseStatus.INVALID_PASSWORD);
         // } else if (response.code == responseCode.USER_NOT_FOUND) {
