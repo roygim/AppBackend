@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import { ErrorType, ResponseObj, User } from "../@types";
 import { CreateUser } from "../@types/dto";
 import * as usersRepository from "../repository/users.repository";
+import { JWT_PUBLIC_CERT } from '../consts';
 
 export const getAll = async (): Promise<ResponseObj<User[]>> => {
     try {
@@ -58,7 +59,7 @@ export const login = async (email: string, password: string): Promise<ResponseOb
 
             delete (user as { password?: string }).password
 
-            const accessToken = jwt.sign({ userId: user.id }, 'ACCESS_TOKEN_SECRET')
+            const accessToken = jwt.sign({ userId: user.id }, JWT_PUBLIC_CERT)
 
             return {
                 success: true,
