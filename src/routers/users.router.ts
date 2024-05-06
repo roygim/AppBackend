@@ -3,6 +3,7 @@ import * as usersService from "../services/users.service";
 import { CreateUser } from "../@types/dto";
 import registerValidation from "./middleware/register.validation";
 import { ErrorType } from "../@types";
+import { tokenValidation } from "./middleware/token.validation";
 
 const usersRouter = Router()
 
@@ -50,6 +51,16 @@ usersRouter.post("/login", async (req, res) => {
             res.cookie('userToken', response.data.accessToken, { httpOnly: true })
             res.status(200).send(response.data.user)            
         }
+    } catch (err) {
+        res.status(500).send('error');
+    }
+});
+
+usersRouter.post("/loaduser", tokenValidation, async (req: any, res: any) => {
+    try {
+        const id = req.userId
+        const response = await usersService.getUserById(id)
+        res.status(200).send(response)
     } catch (err) {
         res.status(500).send('error');
     }

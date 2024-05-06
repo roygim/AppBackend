@@ -56,13 +56,36 @@ export const login = async (email: string, password: string): Promise<ResponseOb
                 }
             }
 
-            const accessToken = jwt.sign(user, 'ACCESS_TOKEN_SECRET')
-
             delete (user as { password?: string }).password
+
+            const accessToken = jwt.sign({ userId: user.id }, 'ACCESS_TOKEN_SECRET')
 
             return {
                 success: true,
                 data: { user, accessToken }
+            }
+        } else {
+            return {
+                success: false,
+                message: "user not found",
+                error: ErrorType.UserNotFound
+            }
+        }
+    } catch (err) {
+        throw err
+    }
+}
+
+export const getUserById = async (id: number): Promise<ResponseObj<User>> => {
+    try {
+        const user: User | null = await usersRepository.getUserById(id)
+
+        if (user) {
+            delete (user as { password?: string }).password
+
+            return {
+                success: true,
+                data: user
             }
         } else {
             return {

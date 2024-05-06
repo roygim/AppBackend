@@ -28,6 +28,19 @@ export const getUserByEmail = async (email: string): Promise<User | null> => {
     }
 }
 
+export const getUserById = async (id: number): Promise<User | null> => {
+    try {
+        const user = await prisma.users.findUnique({
+            where: {
+                id,
+            },
+        })
+        return user ?? null
+    } catch (err) {
+        throw err
+    }
+}
+
 export const addUser = async (newUser: CreateUser): Promise<number> => {
     try {
         const hashedPassword = await bcrypt.hash(newUser.password, 12)
