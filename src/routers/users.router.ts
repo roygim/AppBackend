@@ -2,6 +2,7 @@ import { Router } from "express";
 import * as usersService from "../services/users.service";
 import { CreateUser } from "../@types/dto";
 import registerValidation from "./middleware/register.validation";
+import { ErrorType } from "../@types";
 
 const usersRouter = Router()
 
@@ -38,15 +39,16 @@ usersRouter.post("/login", async (req, res) => {
     try {
         const response = await usersService.login(email, password)
         console.log(response)
-        // if (response.code == responseCode.INVALID_PASSWORD) {
-        //     res.status(400).send(responseStatus.INVALID_PASSWORD);
-        // } else if (response.code == responseCode.USER_NOT_FOUND) {
-        //     res.status(404).send(responseStatus.USER_NOT_FOUND);
-        // } else {
-        //     const retVal = ResponseObject(responseCode.OK, { user: response.data.user }, responseStatus.LOGIN_SUCCESS)
-        //     res.cookie('userToken', response.data.accessToken, { httpOnly: true });
-        //     res.status(200).send(retVal);
-        // }
+        if(!response.success) {
+            if(response.error == ErrorType.UserNotFound) {
+                res.status(404).send('user not found')
+            }
+            else if(response.error == ErrorType.InvalidPassword) {
+                res.status(400).send('invalid password')
+            } 
+        } else {
+            res.status(200).send(response.data.user)
+        }
     } catch (err) {
         res.status(500).send('error');
     }
