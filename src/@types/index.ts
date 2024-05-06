@@ -1,6 +1,8 @@
 export enum ErrorType {
     InternalError = 'InternalError',
-    UserAlreadyExists = 'UserAlreadyExists'
+    UserAlreadyExists = 'UserAlreadyExists',
+    InvalidPassword = 'InvalidPassword',
+    UserNotFound = 'UserNotFound',
 }
 
 export type ResponseObj<T> = {

@@ -1,10 +1,10 @@
 import { Router } from "express";
 import usersRouter from "./users.router";
 
-const routes = Router()
+const routers = Router()
 
-routes.get('/healthz', (req, res) => { return res.status(200).json('ok') })
+routers.get('/healthz', (req, res) => { return res.status(200).json('ok') })
 
-routes.use(usersRouter)
+routers.use(usersRouter)
 
-export default routes
+export default routers

@@ -32,4 +32,25 @@ usersRouter.post("/register", registerValidation, async (req, res) => {
     }
 });
 
+usersRouter.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+
+        // const response = await usersService.login(email, password)
+
+        // if (response.code == responseCode.INVALID_PASSWORD) {
+        //     res.status(400).send(responseStatus.INVALID_PASSWORD);
+        // } else if (response.code == responseCode.USER_NOT_FOUND) {
+        //     res.status(404).send(responseStatus.USER_NOT_FOUND);
+        // } else {
+        //     const retVal = ResponseObject(responseCode.OK, { user: response.data.user }, responseStatus.LOGIN_SUCCESS)
+        //     res.cookie('userToken', response.data.accessToken, { httpOnly: true });
+        //     res.status(200).send(retVal);
+        // }
+    } catch (err) {
+        res.status(500).send('error');
+    }
+});
+
 export default usersRouter

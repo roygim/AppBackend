@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import helmet from "helmet"
 import { PORT } from "./consts";
-import routes from "./routers"
+import routers from "./routers"
 
 const app: Express = express();
 
@@ -24,7 +24,7 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Express + TypeScript Server");
 });
 
-app.use('/api', routes)
+app.use('/api', routers)
 
 app.listen(PORT, () => {
     console.log(`[server]: Server is running at http://localhost:${PORT}`);
