@@ -33,7 +33,7 @@ export const register = async (newUser: CreateUser): Promise<ResponseObj<number>
         }
 
         const userId: number = await usersRepository.addUser(newUser)
-        console.log(userId);
+        
         return {
             success: true,
             data: userId
