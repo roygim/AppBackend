@@ -1,10 +1,10 @@
 import { Router } from "express";
-import usersRoute from "./users.router";
+import usersRouter from "./users.router";
 
 const routes = Router()
 
 routes.get('/healthz', (req, res) => { return res.status(200).json('ok') })
 
-routes.use(usersRoute)
+routes.use(usersRouter)
 
 export default routes
