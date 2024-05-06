@@ -47,7 +47,8 @@ usersRouter.post("/login", async (req, res) => {
                 res.status(400).send('invalid password')
             } 
         } else {
-            res.status(200).send(response.data.user)
+            res.cookie('userToken', response.data.accessToken, { httpOnly: true })
+            res.status(200).send(response.data.user)            
         }
     } catch (err) {
         res.status(500).send('error');
