@@ -58,7 +58,7 @@ export const login = async (email: string, password: string): Promise<ResponseOb
 
             const accessToken = jwt.sign(user, 'ACCESS_TOKEN_SECRET')
 
-            delete (user as {password?: string}).password
+            delete (user as { password?: string }).password
 
             return {
                 success: true,
