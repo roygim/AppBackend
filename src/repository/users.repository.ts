@@ -76,3 +76,17 @@ export const updateUser = async (id: number, user: UpdateUser): Promise<User> =>
         throw err
     }
 }
+
+export const deleteUser = async (id: number): Promise<boolean> => {
+    try {
+        const deletedUser = await prisma.users.delete({
+            where: {
+                id: id
+            }
+        })
+
+        return deletedUser ? true : false
+    } catch (err) {
+        throw err
+    }
+}

@@ -83,4 +83,16 @@ usersRouter.put("/users/update", tokenValidation, async (req: any, res: any) => 
     }
 });
 
+usersRouter.delete("/users/delete", tokenValidation, async (req: any, res: any) => {
+    try {
+        const id = req.userId
+        
+        const response = await usersService.deleteUser(id)
+
+        res.status(200).send(response)
+    } catch (err) {
+        res.status(500).send('error');
+    }
+});
+
 export default usersRouter

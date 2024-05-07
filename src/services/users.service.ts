@@ -127,3 +127,15 @@ export const update = async (id: number, updateUser: UpdateUser): Promise<Respon
         throw err
     }
 }
+
+export const deleteUser = async (id: number): Promise<ResponseObj<any>> => {
+    try {
+        const isDelete = await usersRepository.deleteUser(id)
+
+        return {
+            success: isDelete
+        }
+    } catch (err) {
+        throw err
+    }
+}
