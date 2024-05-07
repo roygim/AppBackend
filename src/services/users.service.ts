@@ -9,9 +9,14 @@ export const getAll = async (): Promise<ResponseObj<User[]>> => {
     try {
         const users: User[] = await usersRepository.getAll()
 
+        const usersLight = users.map((user) => {
+            delete (user as { password?: string }).password
+            return user
+        })
+
         const res: ResponseObj<User[]> = {
             success: true,
-            data: users
+            data: usersLight
         };
 
         return res
@@ -33,7 +38,7 @@ export const register = async (newUser: CreateUser): Promise<ResponseObj<number>
         }
 
         const userId: number = await usersRepository.addUser(newUser)
-        
+
         return {
             success: true,
             data: userId
@@ -104,7 +109,7 @@ export const update = async (id: number, updateUser: UpdateUser): Promise<Respon
     try {
         const user: User = await usersRepository.updateUser(id, updateUser)
 
-        if(user) {
+        if (user) {
             delete (user as { password?: string }).password
 
             return {
