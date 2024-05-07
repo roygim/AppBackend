@@ -41,7 +41,7 @@ export const getUserById = async (id: number): Promise<User | null> => {
     }
 }
 
-export const addUser = async (newUser: CreateUser): Promise<number> => {
+export const addUser = async (newUser: CreateUser): Promise<User> => {
     try {
         const hashedPassword = await bcrypt.hash(newUser.password, 12)
 
@@ -52,7 +52,7 @@ export const addUser = async (newUser: CreateUser): Promise<number> => {
             }
         })
 
-        return createdUser.id
+        return createdUser
     } catch (err) {
         throw err
     }
@@ -68,8 +68,6 @@ export const updateUser = async (id: number, user: UpdateUser): Promise<User> =>
                 ...user
             }
         })
-
-        console.log(updatedUser)
 
         return updatedUser
     } catch (err) {

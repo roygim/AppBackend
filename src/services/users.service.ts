@@ -25,7 +25,7 @@ export const getAll = async (): Promise<ResponseObj<User[]>> => {
     }
 }
 
-export const register = async (newUser: CreateUser): Promise<ResponseObj<number>> => {
+export const register = async (newUser: CreateUser): Promise<ResponseObj<User>> => {
     try {
         const user: User | null = await usersRepository.getUserByEmail(newUser.email)
 
@@ -37,11 +37,13 @@ export const register = async (newUser: CreateUser): Promise<ResponseObj<number>
             }
         }
 
-        const userId: number = await usersRepository.addUser(newUser)
+        const createdUser: User = await usersRepository.addUser(newUser)
+
+        delete (createdUser as { password?: string }).password
 
         return {
             success: true,
-            data: userId
+            data: createdUser
         }
     } catch (err) {
         throw err

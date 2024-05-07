@@ -27,7 +27,7 @@ usersRouter.post("/register", registerValidation, async (req, res) => {
         if (!response.success) {
             res.status(400).send(response)
         } else {
-            res.status(201).send(response.data?.toString());
+            res.status(201).send(response);
         }
     } catch (err) {
         res.status(500).send('error');
@@ -49,8 +49,21 @@ usersRouter.post("/login", async (req, res) => {
             } 
         } else {
             res.cookie('userToken', response.data.accessToken, { httpOnly: true })
-            res.status(200).send(response.data.user)            
+            res.status(200).send(response)
         }
+    } catch (err) {
+        res.status(500).send('error');
+    }
+});
+
+usersRouter.delete("/logout", async (req, res) => {
+    try {
+        res.clearCookie('userToken')
+        const response = {
+            success: true,
+            message: "user logout"
+        }
+        res.status(200).send(response)
     } catch (err) {
         res.status(500).send('error');
     }
