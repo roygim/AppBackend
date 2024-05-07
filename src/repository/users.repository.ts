@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
-import { User } from "../@types"
-import { CreateUser, UpdateUser } from '../@types/dto'
+import { User } from "../types"
+import { CreateUser, UpdateUser } from '../types/dto'
 
 
 const prisma = new PrismaClient()

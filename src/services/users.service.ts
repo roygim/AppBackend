@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { ErrorType, ResponseObj, User } from "../@types";
-import { CreateUser, UpdateUser } from "../@types/dto";
+import { ErrorType, ResponseObj, User } from "../types";
+import { CreateUser, UpdateUser } from "../types/dto";
 import * as usersRepository from "../repository/users.repository";
 import { JWT_PUBLIC_CERT } from '../consts';
 

@@ -1,8 +1,8 @@
 import { Router } from "express";
 import * as usersService from "../services/users.service";
-import { CreateUser, UpdateUser } from "../@types/dto";
+import { CreateUser, UpdateUser } from "../types/dto";
 import registerValidation from "./middleware/register.validation";
-import { ErrorType } from "../@types";
+import { ErrorType } from "../types";
 import { tokenValidation } from "./middleware/token.validation";
 
 const usersRouter = Router()
