@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
 import { User } from "../@types"
-import { CreateUser } from '../@types/dto'
+import { CreateUser, UpdateUser } from '../@types/dto'
 
 
 const prisma = new PrismaClient()
@@ -53,6 +53,25 @@ export const addUser = async (newUser: CreateUser): Promise<number> => {
         })
 
         return createdUser.id
+    } catch (err) {
+        throw err
+    }
+}
+
+export const updateUser = async (id: number, user: UpdateUser): Promise<User> => {
+    try {
+        const updatedUser = await prisma.users.update({
+            where: {
+                id: id
+            },
+            data: {
+                ...user
+            }
+        })
+
+        console.log(updatedUser)
+
+        return updatedUser
     } catch (err) {
         throw err
     }

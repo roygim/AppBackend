@@ -4,3 +4,8 @@ export interface CreateUser {
     email: string;
     password: string;
 }
+
+export interface UpdateUser {
+    firstname?: string;
+    lastname?: string;
+}

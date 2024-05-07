@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { ErrorType, ResponseObj, User } from "../@types";
-import { CreateUser } from "../@types/dto";
+import { CreateUser, UpdateUser } from "../@types/dto";
 import * as usersRepository from "../repository/users.repository";
 import { JWT_PUBLIC_CERT } from '../consts';
 
@@ -93,6 +93,29 @@ export const getUserById = async (id: number): Promise<ResponseObj<User>> => {
                 success: false,
                 message: "user not found",
                 error: ErrorType.UserNotFound
+            }
+        }
+    } catch (err) {
+        throw err
+    }
+}
+
+export const update = async (id: number, updateUser: UpdateUser): Promise<ResponseObj<User>> => {
+    try {
+        const user: User = await usersRepository.updateUser(id, updateUser)
+
+        if(user) {
+            delete (user as { password?: string }).password
+
+            return {
+                success: true,
+                data: user
+            }
+        } else {
+            return {
+                success: false,
+                message: "user not found",
+                error: ErrorType.InternalError
             }
         }
     } catch (err) {

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as usersService from "../services/users.service";
-import { CreateUser } from "../@types/dto";
+import { CreateUser, UpdateUser } from "../@types/dto";
 import registerValidation from "./middleware/register.validation";
 import { ErrorType } from "../@types";
 import { tokenValidation } from "./middleware/token.validation";
@@ -60,6 +60,23 @@ usersRouter.post("/loaduser", tokenValidation, async (req: any, res: any) => {
     try {
         const id = req.userId
         const response = await usersService.getUserById(id)
+        res.status(200).send(response)
+    } catch (err) {
+        res.status(500).send('error');
+    }
+});
+
+usersRouter.put("/users/update", tokenValidation, async (req: any, res: any) => {
+    try {
+        const { firstname, lastname } = req.body
+        const id = req.userId
+        const updateUser: UpdateUser = {
+            firstname: firstname,
+            lastname: lastname
+        }
+
+        const response = await usersService.update(id, updateUser)
+
         res.status(200).send(response)
     } catch (err) {
         res.status(500).send('error');
