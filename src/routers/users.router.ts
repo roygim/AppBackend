@@ -81,11 +81,12 @@ usersRouter.post("/loaduser", tokenValidation, async (req: any, res: any) => {
 
 usersRouter.put("/users/update", tokenValidation, async (req: any, res: any) => {
     try {
-        const { firstname, lastname } = req.body
+        const { firstname, lastname, email } = req.body
         const id = req.userId
         const updateUser: UpdateUser = {
             firstname: firstname,
-            lastname: lastname
+            lastname: lastname,
+            email: email
         }
 
         const response = await usersService.update(id, updateUser)

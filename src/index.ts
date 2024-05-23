@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import helmet from "helmet"
 import { PORT } from "./consts";
 import routers from "./routers"
+import cookieParser from 'cookie-parser';
 
 const app: Express = express();
 
@@ -17,6 +18,8 @@ const corsConfig = {
 app.use(cors(corsConfig))
 
 app.use(helmet())
+
+app.use(cookieParser());
 
 app.use(bodyParser.json({ limit: '1mb' }))
 
