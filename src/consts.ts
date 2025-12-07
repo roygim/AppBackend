@@ -3,9 +3,9 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const PORT = process.env.PORT || 3000
-const JWT_PUBLIC_CERT = process.env.JWT_PUBLIC_CERT || ''
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || ''
 
 export {
     PORT,
-    JWT_PUBLIC_CERT
+    JWT_SECRET_KEY
 }

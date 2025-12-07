@@ -1,12 +1,12 @@
 import jwt from 'jsonwebtoken'
-import { JWT_PUBLIC_CERT } from '../../consts'
+import { JWT_SECRET_KEY } from '../../consts'
 
 export const tokenValidation = async (req: any, res: any, next: any) => {
     // const authHeader = req.headers['authorization']
     // const token = authHeader && authHeader.split(' ')[1]
     // if (token == null) return res.sendStatus(401)
 
-    // jwt.verify(token, JWT_PUBLIC_CERT, (err: any, payload: any) => {
+    // jwt.verify(token, JWT_SECRET_KEY, (err: any, payload: any) => {
     //     if (err) return res.sendStatus(403)
     //     req.userId = payload.userId
     //     next()
@@ -15,7 +15,7 @@ export const tokenValidation = async (req: any, res: any, next: any) => {
     if (req.cookies && req.cookies.userToken) {
         const token = req.cookies.userToken;
 
-        jwt.verify(token, JWT_PUBLIC_CERT, (err: any, payload: any) => {
+        jwt.verify(token, JWT_SECRET_KEY, (err: any, payload: any) => {
             if (err) return res.sendStatus(403)
             req.userId = payload.userId
             next()
