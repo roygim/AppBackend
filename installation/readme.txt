@@ -1,0 +1,3 @@
+1. run npm install
+2. add file .env
+    - DATABASE_URL="mysql://{USER}:{PASSWORD}@localhost:3306/usersdb"

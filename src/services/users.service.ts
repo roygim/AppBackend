@@ -7,8 +7,9 @@ import { JWT_PUBLIC_CERT } from '../consts';
 
 export const getAll = async (): Promise<ResponseObj<User[]>> => {
     try {
+        console.log('getAll');
         const users: User[] = await usersRepository.getAll()
-
+        console.log('users', users);
         const usersLight = users.map((user) => {
             delete (user as { password?: string }).password
             return user
@@ -21,6 +22,7 @@ export const getAll = async (): Promise<ResponseObj<User[]>> => {
 
         return res
     } catch (err) {
+        console.log('err', err);
         throw err
     }
 }
