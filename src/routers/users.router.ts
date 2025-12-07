@@ -79,17 +79,18 @@ usersRouter.get("/users", async (req, res) => {
     }
 });
 
-usersRouter.put("/users/update", tokenValidation, async (req: any, res: any) => {
+usersRouter.put("/users/update/:userId", tokenValidation, async (req: any, res: any) => {
     try {
+        const userId = parseInt(req.params.userId)
         const { firstname, lastname, email } = req.body
-        const id = req.userId
+        
         const updateUser: UpdateUser = {
             firstname: firstname,
             lastname: lastname,
             email: email
         }
 
-        const response = await usersService.update(id, updateUser)
+        const response = await usersService.update(userId, updateUser)
 
         res.status(200).send(response)
     } catch (err) {
