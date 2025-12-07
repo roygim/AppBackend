@@ -7,15 +7,6 @@ import { tokenValidation } from "./middleware/token.validation";
 
 const usersRouter = Router()
 
-usersRouter.get("/users", async (req, res) => {
-    try {
-        const users = await usersService.getAll()
-        res.status(200).send(users);
-    } catch (err) {
-        res.status(500).send('error');
-    }
-});
-
 usersRouter.post("/register", registerValidation, async (req, res) => {
     const { firstname, lastname, email, password } = req.body;
 
@@ -74,6 +65,15 @@ usersRouter.post("/loaduser", tokenValidation, async (req: any, res: any) => {
         const id = req.userId
         const response = await usersService.getUserById(id)
         res.status(200).send(response)
+    } catch (err) {
+        res.status(500).send('error');
+    }
+});
+
+usersRouter.get("/users", async (req, res) => {
+    try {
+        const users = await usersService.getAll()
+        res.status(200).send(users);
     } catch (err) {
         res.status(500).send('error');
     }
