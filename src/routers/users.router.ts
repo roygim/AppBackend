@@ -98,11 +98,11 @@ usersRouter.put("/users/update/:userId", tokenValidation, async (req: any, res: 
     }
 });
 
-usersRouter.delete("/users/delete", tokenValidation, async (req: any, res: any) => {
+usersRouter.delete("/users/delete/:userId", tokenValidation, async (req: any, res: any) => {
     try {
-        const id = req.userId
+        const userId = parseInt(req.params.userId)
         
-        const response = await usersService.deleteUser(id)
+        const response = await usersService.deleteUser(userId)
 
         res.status(200).send(response)
     } catch (err) {
