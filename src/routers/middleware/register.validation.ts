@@ -7,11 +7,11 @@ const BodySchema = z.object({
         .nonempty()
         .refine((val) => emailRegex.test(val), { message: 'invalid email' }),
     firstname: z
-        .string().min(2, { message: 'firstname is minimum 2 letters' })
-        .optional(),
+        .string({ required_error: 'firstname is required' })
+        .min(2, { message: 'firstname is minimum 2 letters' }),
     lastname: z
-        .string().min(2, { message: 'lastname is minimum 2 letters' })
-        .optional(),
+        .string({ required_error: 'lastname is required' })
+        .min(2, { message: 'lastname is minimum 2 letters' }),
     password: z
         .string({ required_error: 'password is required' }).min(4, { message: 'password is minimum 4 letters' })
 })
