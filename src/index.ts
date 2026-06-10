@@ -10,7 +10,8 @@ const app: Express = express();
 
 const corsConfig = {
     origin: [
-        'http://localhost:5173'
+        'http://localhost:5173',
+        'http://localhost:3001',
     ],
     credentials: true
 }
